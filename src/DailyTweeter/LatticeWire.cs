@@ -1,3 +1,6 @@
+using DailyTweeter.Common;
+using DailyTweeter.GatherAccessToken;
+using DailyTweeter.Twitter;
 using SoftLattice.Common;
 
 namespace DailyTweeter
@@ -5,25 +8,28 @@ namespace DailyTweeter
     public class LatticeWire : ILatticeGroup
     {
         private readonly IPublishMessage _publisher;
-        private readonly Store _store;
+        
 
-        public LatticeWire(IPublishMessage publisher, Store store)
+
+        public LatticeWire(IPublishMessage publisher)
         {
             _publisher = publisher;
-            _store = store;
         }
 
         public void Access(ILatticeWiring wiring)
         {
             wiring.RegisterMessageListener(this);
+            wiring.AddResources(s=>s.Contains("resources"));
+            wiring.RegisterSingleService<UserSettings,UserSettings>();
+            wiring.RegisterSingleService<ITwitterSession,TwitterSession>();
+            wiring.RegisterMessageListener<GetAccessTokenUserStory>();
+            wiring.GetFromAppConfig<TwitterKeys>();
         }
 
         public void Handle(StartupMsg message)
         {
-            var msg = _store.IsAccessTokenAvailable
-                          ? new ActivatePluginMsg(typeof (object), "Twitter timeline")
-                          : new ActivatePluginMsg(typeof (object), "Gather Access token");
-            _publisher.Publish(msg);
+            _publisher.Publish(new ActivatePluginMsg(typeof(DailyTweeterViewModel), "The Daily Tweeter."));
+            _publisher.Publish(new ActivateGetAccessTokenUserStoryMsg());
         }
     }
 }

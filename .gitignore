@@ -11,5 +11,6 @@ _ReSharper.*
 *.suo
 *.cache
 *.~
+app.config
 TheDaily*.wrap
 wraps/openwrap

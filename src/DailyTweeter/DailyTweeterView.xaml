@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="DailyTweeter.DailyTweeterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Background>
+        <ImageBrush ImageSource="media/brushed_metal.jpg" />
+    </UserControl.Background>
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1" />
+            <RowDefinition />
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+        
+        <ContentControl Grid.Row="1" x:Name="Main" />
+        
+        <StatusBar Grid.Row="2" Grid.ColumnSpan="2">
+            <StatusBar.Background>
+                <LinearGradientBrush StartPoint="0.5,0.0" EndPoint="0.5,1.0">
+                    <GradientStop Color="#AAFFFFFF" Offset="0.0" />
+                    <GradientStop Color="#22000000" Offset="1.0" />
+                </LinearGradientBrush>
+            </StatusBar.Background>
+            <StatusBarItem HorizontalAlignment="Left" Style="{StaticResource InteractionButton.Container}"  />
+            <StatusBarItem HorizontalAlignment="Right" Style="{StaticResource Activity.Container}"  />
+        </StatusBar>
+    </Grid>
+</UserControl>

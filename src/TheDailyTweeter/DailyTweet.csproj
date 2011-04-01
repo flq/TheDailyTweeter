@@ -110,7 +110,6 @@
       <DependentUpon>GetAccessTokenView.xaml</DependentUpon>
     </Compile>
     <Compile Include="GatherAccessToken\GetAccessTokenViewModel.cs" />
-    <Compile Include="GatherAccessToken\GetAndStoreAccessTokenHandler.cs" />
     <Compile Include="GatherAccessToken\RequestToGetAccessToken.cs" />
     <Compile Include="GatherAccessToken\RequestToScanContentForVerifier.cs" />
     <Compile Include="GatherAccessToken\ScanContentForVerifierHandler.cs" />

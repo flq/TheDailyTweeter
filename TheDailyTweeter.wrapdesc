@@ -2,5 +2,4 @@
 description: Wpf-based Twitter Client to help you against neuron-overload
 build: msbuild;profile=net40
 depends: openwrap anchored content
-depends: twitterizer
 depends: SoftLattice anchored

@@ -7,4 +7,4 @@ depends: caliburnmicro
 depends: MemBus
 depends: nunit
 depends: System.Reactive
-version: 0.6.0.58508416
+version: 0.6.0.59187416

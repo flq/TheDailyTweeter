@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<configuration>
+    <configSections>
+        <section name="TwitterKeys" type="SoftLattice.Enhancements.ConfigHandler`1[[DailyTweeter.Twitter.TwitterKeys, SoftLattice.DailyTweeter]], SoftLattice.Enhancements"/>
+    </configSections>
+    <TwitterKeys>
+        <ApiKey></ApiKey>
+        <ConsumerKey></ConsumerKey>
+        <ConsumerSecret></ConsumerSecret>
+        <RequestTokenUrl>https://api.twitter.com/oauth/request_token</RequestTokenUrl>
+        <AccessTokenUrl>https://api.twitter.com/oauth/access_token</AccessTokenUrl>
+        <AuthorizeUrl>https://api.twitter.com/oauth/authorize</AuthorizeUrl>
+    </TwitterKeys>
+<startup><supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0"/></startup></configuration>

@@ -1,5 +1,6 @@
 using DailyTweeter.Common;
 using DailyTweeter.GatherAccessToken;
+using DailyTweeter.Timeline;
 using DailyTweeter.Twitter;
 using SoftLattice.Common;
 
@@ -23,6 +24,7 @@ namespace DailyTweeter
             wiring.RegisterSingleService<UserSettings,UserSettings>();
             wiring.RegisterSingleService<ITwitterSession,TwitterSession>();
             wiring.RegisterMessageListener<GetAccessTokenUserStory>();
+            wiring.RegisterMessageListener<TwitterInteractionController>();
             wiring.GetFromAppConfig<TwitterKeys>();
         }
 

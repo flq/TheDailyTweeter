@@ -12,14 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Membus.WpfTwitterClient.GatherAccessToken
+namespace DailyTweeter.Timeline
 {
     /// <summary>
-    /// Interaction logic for GetAccessTokenView.xaml
+    /// Interaction logic for TimelinesView.xaml
     /// </summary>
-    public partial class GetAccessTokenView : UserControl
+    public partial class TimelinesView : UserControl
     {
-        public GetAccessTokenView()
+        public TimelinesView()
         {
             InitializeComponent();
         }

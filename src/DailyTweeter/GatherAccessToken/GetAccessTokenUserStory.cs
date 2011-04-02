@@ -1,6 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 using DailyTweeter.Common;
+using DailyTweeter.Timeline;
 using DailyTweeter.Twitter;
 using MemBus.Subscribing;
 using SoftLattice.Common;
@@ -27,10 +28,10 @@ namespace DailyTweeter.GatherAccessToken
         public void Handle(ActivateGetAccessTokenUserStoryMsg msg)
         {
             var token = _store.Get<TwitterAccessToken>("AccessToken");
-            //var msg = token == null
-            //              ? new ActivateMainRegion<GetAccessTokenViewModel>()
-            //              : new ActivatePluginMsg(typeof (object), "Gather Access token");
-            _publisher.Publish(new ActivateMainRegion<GetAccessTokenViewModel>());
+            var next = token == null
+                          ? (object)new ActivateMainRegion<GetAccessTokenViewModel>()
+                          : new ActivateMainRegion<TimelinesViewModel>();
+            _publisher.Publish(next);
         }
 
         public void Handle(ScanContentForVerifierMsg msg)

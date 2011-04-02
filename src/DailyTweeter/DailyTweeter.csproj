@@ -67,6 +67,13 @@
       <SubType>Code</SubType>
     </Compile>
     <AppDesigner Include="Properties\" />
+    <Compile Include="Timeline\GetTwitterStatusMsg.cs" />
+    <Compile Include="Timeline\TwitterInteractionController.cs" />
+    <Compile Include="Timeline\TwitterStatusUpdateMsg.cs" />
+    <Compile Include="Timeline\TimelinesView.xaml.cs">
+      <DependentUpon>TimelinesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Timeline\TimelinesViewModel.cs" />
     <Compile Include="Twitter\ITwitterSession.cs" />
     <Compile Include="Twitter\TwitterAccessToken.cs" />
     <Compile Include="Twitter\TwitterSession.cs" />
@@ -86,6 +93,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="GatherAccessToken\VerifyPinResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Timeline\TimelinesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

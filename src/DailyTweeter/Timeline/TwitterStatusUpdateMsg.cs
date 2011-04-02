@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using Twitterizer;
 
-namespace Membus.WpfTwitterClient.Timeline
+namespace DailyTweeter.Timeline
 {
-    public class NewTwitterStatuses
+    public class TwitterStatusUpdateMsg
     {
         public IEnumerable<TwitterStatus> Statuses { get; private set; }
 
-        public NewTwitterStatuses(IEnumerable<TwitterStatus> statuses)
+        public TwitterStatusUpdateMsg(IEnumerable<TwitterStatus> statuses)
         {
             Statuses = statuses;
         }

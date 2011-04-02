@@ -45,7 +45,7 @@ namespace DailyTweeter.GatherAccessToken
             _session.GetAuthorizationUrl(OnAuthorizationuriAvailable);
         }
 
-        public void TwitterWebsiteNavigating(NavigatingCancelEventArgs args)
+        public void TwitterWebsiteNavigating()
         {
             _publisher.ActivityStarts("Loading Twitter screen");
         }

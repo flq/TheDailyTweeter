@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyTweet", "TheDailyTweeter\DailyTweet.csproj", "{3F778423-7761-4BF3-8A0D-241374FDE18C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyTweeter", "DailyTweeter\DailyTweeter.csproj", "{0BE64B9A-9F26-4FF5-8E32-5C0DC8B460F3}"
 EndProject
 Global
@@ -13,13 +11,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3F778423-7761-4BF3-8A0D-241374FDE18C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F778423-7761-4BF3-8A0D-241374FDE18C}.Debug|x86.ActiveCfg = Debug|x86
-		{3F778423-7761-4BF3-8A0D-241374FDE18C}.Debug|x86.Build.0 = Debug|x86
-		{3F778423-7761-4BF3-8A0D-241374FDE18C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F778423-7761-4BF3-8A0D-241374FDE18C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3F778423-7761-4BF3-8A0D-241374FDE18C}.Release|x86.ActiveCfg = Release|x86
-		{3F778423-7761-4BF3-8A0D-241374FDE18C}.Release|x86.Build.0 = Release|x86
 		{0BE64B9A-9F26-4FF5-8E32-5C0DC8B460F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0BE64B9A-9F26-4FF5-8E32-5C0DC8B460F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BE64B9A-9F26-4FF5-8E32-5C0DC8B460F3}.Debug|x86.ActiveCfg = Debug|Any CPU

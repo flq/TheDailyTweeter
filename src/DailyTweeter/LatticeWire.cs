@@ -23,8 +23,8 @@ namespace DailyTweeter
             wiring.AddResources(s=>s.Contains("resources"));
             wiring.RegisterSingleService<UserSettings,UserSettings>();
             wiring.RegisterSingleService<ITwitterSession,TwitterSession>();
-            wiring.RegisterMessageListener<GetAccessTokenUserStory>();
-            wiring.RegisterMessageListener<TwitterInteractionController>();
+            wiring.RegisterMessageListener<GetAccessTokenUserHub>();
+            wiring.RegisterMessageListener<TwitterInteractionHub>();
             wiring.GetFromAppConfig<TwitterKeys>();
         }
 

@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Twitterizer;
 
 namespace DailyTweeter.Twitter
 {
     public interface ITwitterSession
     {
-        void GetAuthorizationUrl(Action<Uri> authorizationUriAvailable);
-        void GetAccessToken(string verifyCode, Action<TwitterAccessToken> accessTokenAvailable);
-        void LoadHomeTimeline(Action<TwitterResponse<TwitterStatusCollection>> timelineAvailable);
+        Task<Uri> GetAuthorizationUrl();
+        Task<TwitterAccessToken> GetAccessToken(string verifyCode);
+        Task<TwitterResponse<TwitterStatusCollection>> LoadHomeTimeline();
     }
 }

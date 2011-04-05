@@ -52,12 +52,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ActivateMainRegion.cs" />
+    <Compile Include="Common\ExceptionDisplayViewModel.cs" />
+    <Compile Include="Common\ExceptionInteractionMessage.cs" />
     <Compile Include="Common\Helpfulextensions.cs" />
     <Compile Include="Common\UserSettings.cs" />
     <Compile Include="DailyTweeterViewModel.cs" />
     <Compile Include="GatherAccessToken\Messages\ActivateGetAccessTokenUserStoryMsg.cs" />
     <Compile Include="GatherAccessToken\Messages\GetAccessTokenMsg.cs" />
-    <Compile Include="GatherAccessToken\GetAccessTokenUserStory.cs" />
+    <Compile Include="GatherAccessToken\GetAccessTokenUserHub.cs" />
     <Compile Include="GatherAccessToken\GetAccessTokenViewModel.cs" />
     <Compile Include="GatherAccessToken\Messages\InteractToVerifyPinMsg.cs" />
     <Compile Include="GatherAccessToken\Messages\ScanContentForVerifierMsg.cs" />
@@ -68,7 +70,7 @@
     </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="Timeline\GetTwitterStatusMsg.cs" />
-    <Compile Include="Timeline\TwitterInteractionController.cs" />
+    <Compile Include="Timeline\TwitterInteractionHub.cs" />
     <Compile Include="Timeline\TwitterStatusUpdateMsg.cs" />
     <Compile Include="Timeline\TimelinesView.xaml.cs">
       <DependentUpon>TimelinesView.xaml</DependentUpon>
@@ -84,6 +86,10 @@
     <None Include="App.configfake" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Common\ExceptionDisplayResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DailyTweeterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

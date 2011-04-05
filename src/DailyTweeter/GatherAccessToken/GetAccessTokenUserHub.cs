@@ -1,36 +1,35 @@
 using System;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using DailyTweeter.Common;
 using DailyTweeter.Timeline;
 using DailyTweeter.Twitter;
+using MemBus.Messages;
 using MemBus.Subscribing;
 using SoftLattice.Common;
 
 namespace DailyTweeter.GatherAccessToken
 {
-    public class GetAccessTokenUserStory : IAcceptDisposeToken
+    public class GetAccessTokenUserHub : IAcceptDisposeToken
     {
         private static readonly Regex verifier = new Regex(@"\d\d\d\d\d\d\d", RegexOptions.Multiline | RegexOptions.Compiled);
         private readonly IPublishMessage _publisher;
-        private readonly IApplicationStorage _store;
         private readonly ITwitterSession _session;
         private readonly UserSettings _settings;
         private IDisposable _disposeToken;
 
-        public GetAccessTokenUserStory(IPublishMessage publisher, IApplicationStorage store, ITwitterSession session, UserSettings settings)
+        public GetAccessTokenUserHub(IPublishMessage publisher, ITwitterSession session, UserSettings settings)
         {
             _publisher = publisher;
             _session = session;
             _settings = settings;
-            _store = store;
         }
 
         public void Handle(ActivateGetAccessTokenUserStoryMsg msg)
         {
-            var token = _store.Get<TwitterAccessToken>("AccessToken");
-            var next = token == null
-                          ? (object)new ActivateMainRegion<GetAccessTokenViewModel>()
-                          : new ActivateMainRegion<TimelinesViewModel>();
+            var next = _settings.IsAccessTokenAvailable
+                          ? (object)new ActivateMainRegion<TimelinesViewModel>()
+                          : new ActivateMainRegion<GetAccessTokenViewModel>();
             _publisher.Publish(next);
         }
 
@@ -45,17 +44,29 @@ namespace DailyTweeter.GatherAccessToken
 
         public void Handle(GetAccessTokenMsg msg)
         {
-            _session.GetAccessToken(msg.Pin, token =>
-            {
-                _settings.StoreAccessToken(token);
-                //TODO: Publish message to load the main twitter view
-                _disposeToken.Dispose();
-            });
+            var getAccessToken = _session.GetAccessToken(msg.Pin);
+            getAccessToken.ContinueWith(AccessTokenAvailable);
+            getAccessToken.Start();
         }
 
         public void Accept(IDisposable disposeToken)
         {
             _disposeToken = disposeToken;
+        }
+
+        private void AccessTokenAvailable(Task<TwitterAccessToken> task)
+        {
+            try
+            {
+                _settings.StoreAccessToken(task.Result);
+                _publisher.Publish(new ActivateMainRegion<TimelinesViewModel>());
+                _disposeToken.Dispose();
+            }
+            catch (AggregateException x)
+            {
+                foreach (var ex in x.InnerExceptions)
+                    _publisher.Publish(new ExceptionOccurred(ex));
+            }
         }
     }
 }

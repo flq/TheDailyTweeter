@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using DailyTweeter.Common;
-using SoftLattice.Common;
 using Twitterizer;
 
 namespace DailyTweeter.Twitter
@@ -13,43 +12,41 @@ namespace DailyTweeter.Twitter
 
         private string requestToken;
 
-        readonly TaskFactory taskFactory = new TaskFactory();
-
         public TwitterSession(TwitterKeys keys, UserSettings userSettings)
         {
             _keys = keys;
             _userSettings = userSettings;
         }
 
-        public void GetAuthorizationUrl(Action<Uri> authorizationUriAvailable)
+        public Task<Uri> GetAuthorizationUrl()
         {
-            taskFactory.StartNew(() =>
-                                     {
-                                         var response = OAuthUtility.GetRequestToken(_keys.ConsumerKey,
-                                                                                     _keys.ConsumerSecret, "oob");
-                                         requestToken = response.Token;
-                                         var uri = OAuthUtility.BuildAuthorizationUri(requestToken);
-                                         authorizationUriAvailable(uri);
-                                     });
+            return new Task<Uri>(() =>
+                {
+                    var response1 = OAuthUtility.GetRequestToken(_keys.ConsumerKey,
+                                                                _keys.ConsumerSecret, "oob");
+                    requestToken = response1.Token;
+                    var uri1 = OAuthUtility.BuildAuthorizationUri(requestToken);
+                    return uri1;
+                });
         }
 
-        public void GetAccessToken(string verifyCode, Action<TwitterAccessToken> accessTokenAvailable)
+        public Task<TwitterAccessToken> GetAccessToken(string verifyCode)
         {
-            taskFactory.StartNew(() =>
+            return new Task<TwitterAccessToken>(() =>
                 {
                     var response = OAuthUtility.GetAccessToken(_keys.ConsumerKey, _keys.ConsumerSecret, requestToken, verifyCode);
                     var twitterAccessToken = new TwitterAccessToken { Secret = response.TokenSecret, Token = response.Token };
                     _userSettings.StoreAccessToken(twitterAccessToken);
-                    accessTokenAvailable(twitterAccessToken);
+                    return twitterAccessToken;
                 });
         }
 
-        public void LoadHomeTimeline(Action<TwitterResponse<TwitterStatusCollection>> timelineAvailable)
+        public Task<TwitterResponse<TwitterStatusCollection>> LoadHomeTimeline()
         {
-            taskFactory.StartNew(() =>
+            return new Task<TwitterResponse<TwitterStatusCollection>>(() =>
                                      {
                                          var statuses = TwitterTimeline.HomeTimeline(getOAuthToken());
-                                         timelineAvailable(statuses);
+                                         return statuses;
                                      });
         }
 

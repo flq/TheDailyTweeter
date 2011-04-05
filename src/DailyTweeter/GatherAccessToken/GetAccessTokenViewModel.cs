@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Caliburn.Micro;
@@ -24,7 +25,7 @@ namespace DailyTweeter.GatherAccessToken
             _dispatchServices = dispatchServices;
         }
 
-        public void TwitterLoadCompleted(NavigationEventArgs e)
+        public void TwitterLoadCompleted()
         {
             var s = _loadedContents();
             _publisher.ActivityEnds();
@@ -42,7 +43,10 @@ namespace DailyTweeter.GatherAccessToken
                                      var b = browser.Document as dynamic;
                                      return (string) b.documentElement.innerText;
                                  };
-            _session.GetAuthorizationUrl(OnAuthorizationuriAvailable);
+
+            var authorizeTask = _session.GetAuthorizationUrl();
+            authorizeTask.ContinueWith(OnAuthorizationuriAvailable);
+            authorizeTask.Start();
         }
 
         public void TwitterWebsiteNavigating()
@@ -50,8 +54,9 @@ namespace DailyTweeter.GatherAccessToken
             _publisher.ActivityStarts("Loading Twitter screen");
         }
 
-        private void OnAuthorizationuriAvailable(Uri uri)
+        private void OnAuthorizationuriAvailable(Task<Uri> uriCreationTask)
         {
+            var uri = uriCreationTask.Result;
             _dispatchServices.EnsureActionOnDispatcher(()=>_loadUri(uri));
         }
         

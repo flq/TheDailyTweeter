@@ -7,8 +7,8 @@
     <Grid Background="Transparent">
         <WebBrowser x:Name="browser"
             cal:Message.Attach="[Event Loaded] = [Action BrowserLoaded($source)];
-                                [Event LoadCompleted] = [Action TwitterLoadCompleted($eventArgs)];
-                                [Event Navigating] = [Action TwitterWebsiteNavigating($eventArgs)]">
+                                [Event LoadCompleted] = [Action TwitterLoadCompleted()];
+                                [Event Navigating] = [Action TwitterWebsiteNavigating()]">
         </WebBrowser>
     </Grid>
 </UserControl>
